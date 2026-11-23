@@ -29,6 +29,8 @@ et vérifie que le backend répond `pong`.
 Vite transmet `/api/ping` à `http://localhost:8080/ping`. Si Spring
 écoute ailleurs en développement, copie `.env.example` en `.env.local`
 et adapte `FITOMBO_API_PROXY_TARGET`. Redémarre Vite après ce changement.
+En développement, le navigateur utilise toujours le proxy Vite.
+`VITE_API_BASE_URL` sert uniquement au build de production.
 
 `npm run check` vérifie la syntaxe JavaScript. `npm run build` génère le site
 statique dans `dist/`. Pour les modes de déploiement, voir

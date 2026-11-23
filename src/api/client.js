@@ -1,5 +1,6 @@
-export const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '/api')
-  .replace(/\/+$/, '')
+const apiBaseUrl = import.meta.env.DEV
+  ? '/api'
+  : (import.meta.env.VITE_API_BASE_URL?.trim() || '/api').replace(/\/+$/, '')
 
 export function creerClientApi($http) {
   return {
