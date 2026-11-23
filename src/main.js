@@ -12,8 +12,16 @@ function AccueilFitombo(api) {
       (disponible) => {
         this.message = disponible ? 'API disponible.' : 'Réponse inattendue de l’API.'
       },
-      () => {
-        this.message = 'API inaccessible.'
+      ({ status, xhrStatus }) => {
+        if (xhrStatus === 'timeout') {
+          this.message = 'L’API ne répond pas dans le délai prévu.'
+        } else if (status === 502) {
+          this.message = 'Le serveur web ne parvient pas à joindre l’API (HTTP 502).'
+        } else if (status > 0) {
+          this.message = `Le test de connexion a échoué (HTTP ${status}).`
+        } else {
+          this.message = 'Le navigateur n’a reçu aucune réponse de l’API.'
+        }
       },
     ).finally(() => {
       this.verificationEnCours = false
