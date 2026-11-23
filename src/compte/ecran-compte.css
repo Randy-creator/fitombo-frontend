@@ -16,7 +16,7 @@
   min-height: 16rem;
   align-items: end;
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: 3%;
   background: #17372c27;
   color: #fff;
   box-shadow: 0 16px 38px #142b2529;
@@ -51,7 +51,7 @@
   overflow: hidden;
   padding: clamp(1.35rem, 4vw, 3.8rem);
   border: 0;
-  border-radius: clamp(1rem, 1.7vw, 1.65rem);
+  border-radius: 3%;
   background:
     radial-gradient(ellipse at 95% 0%, #f9fff86b, transparent 65%),
     linear-gradient(145deg, #fffdf7df, #eef5e8c7);

@@ -18,10 +18,10 @@ guide-accueil { display: grid; grid-area: features; min-width: 0; }
 }
 .guide-livre:active { cursor: grabbing; }
 .guide-pages {
+  border-radius: 3%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-height: 0;
-  border-radius: 1rem;
   box-shadow: 0 2px 0 #e4dece, 0 4px 0 #d5cdbb, 0 6px 0 #c3baaa, 0 15px 26px #211d2650;
 }
 .guide-page, .guide-face {
@@ -39,11 +39,11 @@ guide-accueil { display: grid; grid-area: features; min-width: 0; }
   overflow-wrap: anywhere;
 }
 .guide-page-gauche {
-  border-radius: 1rem .18rem .18rem 1rem;
+  border-radius: 3%;
   box-shadow: inset -16px 0 16px -16px #5a4c33a6;
 }
 .guide-page-droite {
-  border-radius: .18rem 1rem 1rem .18rem;
+  border-radius: 3%;
   box-shadow: inset 16px 0 16px -16px #5a4c3380;
 }
 .guide-numero {
@@ -104,7 +104,7 @@ guide-accueil { display: grid; grid-area: features; min-width: 0; }
   transition-property: transform;
   transition-timing-function: var(--ease-ui);
 }
-.guide-face { position: absolute; inset: 0; border-radius: .5rem; backface-visibility: hidden; }
+.guide-face { position: absolute; inset: 0; border-radius: 3%; backface-visibility: hidden; }
 .guide-verso { transform: rotateY(180deg); }
 @keyframes feuille-suivante {
   to { transform: rotateY(-180deg); }
