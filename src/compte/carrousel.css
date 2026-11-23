@@ -5,13 +5,14 @@ carrousel-fitombo, .carousel-photos {
 
 .carousel-photos {
   overflow: hidden;
-  opacity: .83;
+  opacity: .75;
   pointer-events: none;
 }
 .carousel-photos::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 3;
   background: linear-gradient(180deg, #162f2800 19%, #112a218f 57%, #10291df8);
 }
 .carousel-photo {
@@ -24,7 +25,8 @@ carrousel-fitombo, .carousel-photos {
   filter: brightness(.9);
   opacity: 0;
 }
-.carousel-photo-active { opacity: .9; }
+.carousel-photo-precedente { opacity: 1; z-index: 1; }
+.carousel-photo-active { opacity: 1; z-index: 2; }
 
 .carousel-controls {
   position: absolute;
@@ -63,6 +65,11 @@ carrousel-fitombo, .carousel-photos {
   .carousel-photo { object-position: 60% 45%; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .carousel-photo { transition: opacity 720ms cubic-bezier(.42, 0, .58, 1); }
+  .carousel-fondu .carousel-photo-active { animation: apparition-photo 920ms cubic-bezier(.38, 0, .28, 1) both; }
   .carousel-toggle, .carousel-dot { transition: background-color var(--motion); }
+}
+
+@keyframes apparition-photo {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

@@ -55,9 +55,6 @@ guide-accueil { display: grid; grid-area: features; min-width: 0; }
   font-variant-numeric: tabular-nums;
   text-align: end;
 }
-.guide-page-gauche .guide-numero,
-.guide-feuillet-suivant .guide-verso .guide-numero,
-.guide-feuillet-precedent .guide-recto .guide-numero { text-align: start; }
 .guide-illustration {
   display: block;
   width: 100%;
@@ -88,7 +85,7 @@ guide-accueil { display: grid; grid-area: features; min-width: 0; }
   z-index: 2;
   width: 50%;
   transform-style: preserve-3d;
-  animation-timing-function: cubic-bezier(.42, 0, .32, 1);
+  animation-timing-function: cubic-bezier(.36, .04, .26, 1);
   animation-fill-mode: both;
   pointer-events: none;
 }

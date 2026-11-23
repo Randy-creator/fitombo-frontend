@@ -12,6 +12,12 @@ function Carrousel($interval, $scope, $window, textes) {
   this.enPause = false
   let minuterie
 
+  const changerPhoto = (index) => {
+    if (index === this.active) return
+    this.precedente = this.active
+    this.active = index
+  }
+
   const arreter = () => {
     if (!minuterie) return
     $interval.cancel(minuterie)
@@ -21,7 +27,7 @@ function Carrousel($interval, $scope, $window, textes) {
     arreter()
     if (!this.animationPermise || this.enPause) return
     minuterie = $interval(() => {
-      this.active = (this.active + 1) % photosCarrousel.length
+      changerPhoto((this.active + 1) % photosCarrousel.length)
     }, intervalle)
   }
 
@@ -31,7 +37,7 @@ function Carrousel($interval, $scope, $window, textes) {
   })
   this.$onDestroy = arreter
   this.selectionner = (index) => {
-    this.active = index
+    changerPhoto(index)
     relancer()
   }
   this.basculer = () => {

@@ -19,6 +19,12 @@ function Compte($q, session, textes) {
     this.champs.identifiant = this.champs.identifiant === 'email' ? 'telephone' : 'email'
     this.erreur = ''
   }
+  this.formaterTelephone = () => {
+    const numero = this.champs.numeroNational?.replaceAll(' ', '')
+    if (numero?.length === 9) {
+      this.champs.numeroNational = numero.replace(/^(..)(..)(...)(..)$/, '$1 $2 $3 $4')
+    }
+  }
   this.soumettre = () => {
     if (this.occupe) return
     this.occupe = true
@@ -28,7 +34,7 @@ function Compte($q, session, textes) {
     const action = async () => {
       if (this.mode === 'connexion') {
         const identifiants = identifiant === 'telephone'
-          ? { telephone: `${this.indicatif}${numeroNational}`, motDePasse }
+          ? { telephone: `${this.indicatif}${numeroNational.replaceAll(' ', '')}`, motDePasse }
           : { email, motDePasse }
         await session.connecter(identifiants)
       } else if (!this.demande) {

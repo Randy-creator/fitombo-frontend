@@ -23,12 +23,13 @@ const pages = [
   { titre: 'tableau', texte: 'guideTableau', image: imageTableau, etapes: ['guideLireEffectif', 'guideLireMarge'] },
   { titre: 'deconnexion', texte: 'guideDeconnexion', image: imageDeconnexion, etapes: ['guideOuvrirEntete', 'guideQuitterCompte'] },
 ].map((page, index) => ({ ...page, numero: index + 1 }))
-const dureeFeuillet = 620
+const dureeFeuillet = 740
 
 function GuideAccueil($scope, $window, $timeout) {
   this.debut = 0
   this.total = pages.length
   let minuterie
+  let cibleFinale
 
   this.$onInit = () => observerMouvement($scope, $window, (permis) => {
     this.animationPermise = permis
@@ -55,12 +56,21 @@ function GuideAccueil($scope, $window, $timeout) {
     }
   }
 
+  const appliquerFin = () => {
+    this.debut = cibleFinale
+    this.feuillet = undefined
+    minuterie = undefined
+  }
+
   const finaliser = (cible, duree) => {
-    minuterie = $timeout(() => {
-      this.debut = cible
-      this.feuillet = undefined
-      minuterie = undefined
-    }, duree)
+    cibleFinale = cible
+    minuterie = $timeout(appliquerFin, duree + 100)
+  }
+
+  this.finAnimation = () => {
+    if (!minuterie) return
+    $timeout.cancel(minuterie)
+    appliquerFin()
   }
 
   this.tourner = (direction) => {
@@ -102,7 +112,7 @@ function GuideAccueil($scope, $window, $timeout) {
       return
     }
     const reste = valider ? 1 - feuillet.progression : feuillet.progression
-    const duree = Math.round(150 + reste * 255)
+    const duree = Math.round(195 + reste * 315)
     feuillet.style = {
       transform: `rotateY(${valider ? -direction * 180 : 0}deg)`,
       transitionDuration: `${duree}ms`,

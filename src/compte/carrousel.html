@@ -1,6 +1,6 @@
-<div class="carousel-photos" aria-hidden="true">
+<div class="carousel-photos" ng-class="{'carousel-fondu': $ctrl.precedente !== undefined}" aria-hidden="true">
   <img class="carousel-photo" ng-repeat="photo in $ctrl.photos track by photo"
-    ng-src="{{photo}}" ng-class="{'carousel-photo-active': $index === $ctrl.active}" alt="">
+    ng-src="{{photo}}" ng-class="{'carousel-photo-active': $index === $ctrl.active, 'carousel-photo-precedente': $index === $ctrl.precedente}" alt="">
 </div>
 <div class="carousel-controls" role="group" ng-attr-aria-label="{{$ctrl.t.lire('photosElevage')}}">
   <button type="button" class="carousel-dot" ng-repeat="photo in $ctrl.photos track by photo"

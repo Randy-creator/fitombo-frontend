@@ -29,7 +29,7 @@
   --space-3: .75rem;
   --space-4: 1rem;
   --ease-ui: cubic-bezier(.22, .65, .32, 1);
-  --motion: 220ms var(--ease-ui);
+  --motion: 260ms var(--ease-ui);
 }
 
 * { box-sizing: border-box; }
