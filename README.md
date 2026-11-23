@@ -11,6 +11,9 @@ Depuis ce dossier, vérifie que `curl -fsS http://127.0.0.1:8080/ping`
 renvoie `pong`. Si Spring échoue au démarrage, vérifie notamment que la
 base nommée dans `fitombo/.env` par `DB_URL` existe. Compose initialise
 la base de `DB_NAME` uniquement lors de la création du volume PostgreSQL.
+Si `DB_URL` cible `fitombo_api_test`, lance `make -C .. postgres-test`
+pour démarrer PostgreSQL et créer cette base si elle manque, puis
+`make -C .. backend`.
 
 Avec Node.js 22.12 ou ultérieur (ou Node.js 20 à partir de 20.19) et npm,
 exécuter depuis ce dossier :
