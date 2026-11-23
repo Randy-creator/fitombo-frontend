@@ -1,0 +1,92 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .65rem;
+  padding: .45rem .15rem;
+  color: var(--deep-green);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .62rem;
+  font-size: 1.42rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -.055em;
+}
+.shell-connexion .brand {
+  color: #fbfff6;
+  text-shadow: 0 1px 4px #0c211b, 0 3px 12px #0c211baf;
+}
+.brand-mark {
+  flex: none;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #a0c4a47d;
+  border-radius: .66rem;
+  background: linear-gradient(150deg, #306654, #123b32);
+}
+.brand-mark::before, .brand-mark::after {
+  content: "";
+  position: absolute;
+  background: #d8ecbd;
+}
+.brand-mark::before {
+  width: .59rem;
+  height: .4rem;
+  left: .27rem;
+  top: .73rem;
+  border-radius: 0 90% 0 90%;
+  transform: rotate(6deg);
+}
+.brand-mark::after {
+  width: .72rem;
+  height: .48rem;
+  right: .24rem;
+  top: .49rem;
+  border-radius: 90% 0 90% 0;
+  transform: rotate(-9deg);
+}
+.brand-stem {
+  position: absolute;
+  left: .87rem;
+  bottom: .32rem;
+  width: 1.5px;
+  height: .71rem;
+  border-radius: 2px;
+  background: #d8ecbd;
+  transform: rotate(14deg);
+  transform-origin: bottom center;
+}
+.account { min-width: 0; overflow-wrap: anywhere; font-size: .85rem; }
+.language-switch { display: inline-flex; align-items: center; gap: .4rem; }
+.language {
+  min-height: 2.35rem;
+  padding: .38rem .85rem;
+  border: 1px solid #e9f7e79c;
+  border-radius: 999px;
+  background: #173b32a3;
+  color: #f6fbf4;
+  font-size: .79rem;
+  font-weight: 600;
+  backdrop-filter: blur(7px);
+}
+.language[aria-pressed=true] {
+  border-color: #e9f7e7;
+  background: #dceee1;
+  color: var(--deep-green);
+  box-shadow: 0 3px 10px #142b252e;
+}
+.language:not([aria-pressed=true]):hover { background: #234f42db; }
+.language:focus-visible { outline-color: #dceee1; outline-offset: 2px; }
+.language-code { display: none; }
+@media (max-width: 28rem) {
+  .language-name { display: none; }
+  .language-code { display: inline; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .language { transition: background-color var(--motion), color var(--motion); }
+}

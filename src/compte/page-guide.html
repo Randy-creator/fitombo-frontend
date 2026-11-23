@@ -1,0 +1,9 @@
+<img class="guide-illustration" ng-if="$ctrl.page.image" ng-src="{{$ctrl.page.image}}" alt="" draggable="false">
+<h2>{{$ctrl.t.lire($ctrl.page.titre)}}</h2>
+<p>{{$ctrl.t.lire($ctrl.page.texte)}}</p>
+<ol class="guide-etapes">
+  <li ng-repeat="etape in $ctrl.page.etapes track by etape">{{$ctrl.t.lire(etape)}}</li>
+</ol>
+<footer class="guide-numero">
+  <span class="visually-hidden">{{$ctrl.t.lire('pageGuide')}} </span>{{$ctrl.t.nombre($ctrl.page.numero)}}
+</footer>

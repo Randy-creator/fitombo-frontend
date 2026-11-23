@@ -1,0 +1,20 @@
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"><span class="brand-stem"></span></span>
+    <span>Fitombo</span>
+  </div>
+  <div class="language-switch" role="group" ng-attr-aria-label="{{$ctrl.t.lire('langue')}}" ng-if="!$ctrl.profil">
+    <button type="button" class="language" ng-attr-aria-pressed="{{$ctrl.t.langue === 'fr'}}"
+      ng-click="$ctrl.onLangue({langue: 'fr'})" lang="fr" aria-label="Français">
+      <span class="language-name">Français</span><span class="language-code" aria-hidden="true">FR</span>
+    </button>
+    <button type="button" class="language" ng-attr-aria-pressed="{{$ctrl.t.langue === 'mg'}}"
+      ng-click="$ctrl.onLangue({langue: 'mg'})" lang="mg" aria-label="Malagasy">
+      <span class="language-name">Malagasy</span><span class="language-code" aria-hidden="true">MG</span>
+    </button>
+  </div>
+  <div class="actions account" ng-if="$ctrl.profil">
+    <span>{{$ctrl.profil.nom}}</span>
+    <button type="button" class="subtle" ng-click="$ctrl.onDeconnexion()" ng-disabled="$ctrl.fermeture">{{$ctrl.t.lire('deconnexion')}}</button>
+  </div>
+</header>

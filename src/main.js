@@ -1,48 +1,30 @@
 import 'angular/angular.js'
-import { creerClientApi } from './api/client.js'
+import './styles/base.css'
+import { requete } from './api/http.js'
+import { application } from './application/application.js'
+import { compte } from './compte/ecran-compte.js'
+import { carrousel } from './compte/carrousel.js'
+import { guideAccueil, pageGuide } from './compte/guide-accueil.js'
+import { glissementGuide } from './compte/glissement-guide.js'
+import { creerApiExploitations } from './exploitations/api-exploitations.js'
+import { exploitations } from './exploitations/ecran-exploitations.js'
+import { creerTextes } from './i18n/textes.js'
+import { enTete } from './interface/en-tete.js'
+import { fondVideo } from './interface/fond-video.js'
+import { creerSession } from './session/session.js'
 
-const angular = window.angular
+window.angular.module('fitombo', [])
+  .factory('session', () => creerSession(requete))
+  .factory('textes', creerTextes)
+  .factory('apiExploitations', creerApiExploitations)
+  .component('enTeteFitombo', enTete)
+  .component('fondVideo', fondVideo)
+  .component('carrouselFitombo', carrousel)
+  .component('guideAccueil', guideAccueil)
+  .component('pageGuide', pageGuide)
+  .directive('glissementGuide', glissementGuide)
+  .component('compteFitombo', compte)
+  .component('exploitationsFitombo', exploitations)
+  .component('fitomboApp', application)
 
-function AccueilFitombo(api) {
-  this.verifierApi = () => {
-    this.verificationEnCours = true
-    this.message = 'Vérification en cours…'
-
-    return api.verifierDisponibilite().then(
-      (disponible) => {
-        this.message = disponible ? 'API disponible.' : 'Réponse inattendue de l’API.'
-      },
-      ({ status, xhrStatus }) => {
-        if (xhrStatus === 'timeout') {
-          this.message = 'L’API ne répond pas dans le délai prévu.'
-        } else if (status === 502) {
-          this.message = 'Le serveur web ne parvient pas à joindre l’API (HTTP 502).'
-        } else if (status > 0) {
-          this.message = `Le test de connexion a échoué (HTTP ${status}).`
-        } else {
-          this.message = 'Le navigateur n’a reçu aucune réponse de l’API.'
-        }
-      },
-    ).finally(() => {
-      this.verificationEnCours = false
-    })
-  }
-}
-
-AccueilFitombo.$inject = ['api']
-
-angular.module('fitombo', [])
-  .factory('api', creerClientApi)
-  .component('fitomboApp', {
-    controller: AccueilFitombo,
-    template: `
-      <h1>Fitombo</h1>
-      <p>Carnet d’élevage</p>
-      <button type="button" ng-click="$ctrl.verifierApi()" ng-disabled="$ctrl.verificationEnCours">
-        Tester la connexion à l’API
-      </button>
-      <p role="status" ng-bind="$ctrl.message"></p>
-    `,
-  })
-
-angular.bootstrap(document, ['fitombo'], { strictDi: true })
+window.angular.bootstrap(document, ['fitombo'], { strictDi: true })

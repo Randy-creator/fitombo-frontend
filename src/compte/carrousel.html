@@ -1,0 +1,15 @@
+<div class="carousel-photos" aria-hidden="true">
+  <img class="carousel-photo" ng-repeat="photo in $ctrl.photos track by photo"
+    ng-src="{{photo}}" ng-class="{'carousel-photo-active': $index === $ctrl.active}" alt="">
+</div>
+<div class="carousel-controls" role="group" ng-attr-aria-label="{{$ctrl.t.lire('photosElevage')}}">
+  <button type="button" class="carousel-dot" ng-repeat="photo in $ctrl.photos track by photo"
+    ng-click="$ctrl.selectionner($index)" ng-attr-aria-current="{{$index === $ctrl.active}}"
+    ng-attr-aria-label="{{$ctrl.t.lire('photo')}} {{$ctrl.t.nombre($index + 1)}}">
+    <span aria-hidden="true"></span>
+  </button>
+  <button type="button" class="carousel-toggle" ng-if="$ctrl.animationPermise" ng-click="$ctrl.basculer()"
+    ng-attr-aria-label="{{$ctrl.t.lire($ctrl.enPause ? 'reprendrePhotos' : 'pausePhotos')}}">
+    <span aria-hidden="true" ng-class="$ctrl.enPause ? 'carousel-play' : 'carousel-pause'"></span>
+  </button>
+</div>

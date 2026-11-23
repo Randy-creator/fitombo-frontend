@@ -23,11 +23,10 @@ npm ci
 npm run dev
 ```
 
-Ouvrir http://localhost:5173. Le bouton de l’accueil appelle `GET /ping`
-et vérifie que le backend répond `pong`.
+Ouvrir http://localhost:5173 pour se connecter ou créer un compte.
 
-Vite transmet `/api/ping` à `http://localhost:8080/ping`. Si Spring
-écoute ailleurs en développement, copie `.env.example` en `.env.local`
+Vite transmet les requêtes `/api` à Spring sur `http://localhost:8080`.
+Si Spring écoute ailleurs en développement, copie `.env.example` en `.env.local`
 et adapte `FITOMBO_API_PROXY_TARGET`. Redémarre Vite après ce changement.
 En développement, le navigateur utilise toujours le proxy Vite.
 `VITE_API_BASE_URL` sert uniquement au build de production.
@@ -57,10 +56,22 @@ de photos et la modification directe des fiches animal ou lot ne figurent
 pas dans ce contrat. Le guide backend demande Java 25, contrairement à
 Java 21 indiqué dans le cahier des charges.
 
-Le périmètre MVP du cahier des charges commence par les comptes,
-les exploitations, le cheptel, les pesées, les objectifs et les ventes.
-Le socle livré contient l’accueil et le contrôle de disponibilité de
-l’API. Les parcours métier restent à implémenter.
+## Parcours disponibles
+
+Ouvre le carnet avec un compte existant ou crée un compte en deux étapes avec
+un code e-mail. Avec le profil Spring `dev` et `EMAIL_MODE=console`, récupère
+le code dans les logs du backend. La session est conservée en mémoire et une
+actualisation de la page demande une nouvelle connexion.
+
+Après connexion, la liste paginée permet de créer une exploitation et de
+consulter les indicateurs du propriétaire pour le mois en cours. Les
+libellés suivent la langue du profil. La langue des formulaires publics
+est accessible depuis l’en-tête.
+
+`npm test` couvre le transport HTTP, le renouvellement et la séparation des
+accès. Pour la vérification avec le backend local, essaie une inscription
+avec une adresse neuve, une connexion, la création d’une exploitation,
+l’ouverture de son tableau de bord et la déconnexion.
 
 - [Cahier des charges](../fitombo/docs/Cahier%20des%20charges%20%E2%80%94%20Fitombo.pdf) et [modèle UML](../fitombo/docs/elevage-uml.mermaid)
 - [Contrat OpenAPI](../openapi.json), [intégration web](../frontend-integration.md) et [conventions frontend](../frontend-developpement.md)

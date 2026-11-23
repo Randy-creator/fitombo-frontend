@@ -1,0 +1,79 @@
+<section class="auth-layout">
+  <article class="hero">
+    <carrousel-fitombo></carrousel-fitombo>
+    <div class="hero-copy">
+      <h1>{{$ctrl.t.lire('carnet')}} <strong>{{$ctrl.t.lire('elevage')}}</strong></h1>
+      <p>{{$ctrl.t.lire('intro')}}</p>
+    </div>
+  </article>
+  <article class="card auth-card" ng-class="{'auth-card-inscription': $ctrl.mode === 'inscription'}">
+    <span class="auth-liane" aria-hidden="true"><span></span></span>
+    <header class="auth-heading">
+      <div class="auth-heading-title">
+        <span class="brand-mark auth-embleme" aria-hidden="true"><span class="brand-stem"></span></span>
+        <h2>{{$ctrl.t.lire($ctrl.mode)}}</h2>
+      </div>
+      <p ng-if="$ctrl.mode === 'connexion'">{{$ctrl.t.lire('introConnexion')}}</p>
+      <p ng-if="$ctrl.mode === 'inscription' && !$ctrl.demande">{{$ctrl.t.lire('introInscription')}}</p>
+    </header>
+    <ol class="auth-etapes" ng-if="$ctrl.mode === 'inscription'">
+      <li ng-class="{'auth-etape-terminee': $ctrl.demande}" ng-attr-aria-current="{{!$ctrl.demande ? 'step' : undefined}}">
+        <span aria-hidden="true">1</span>{{$ctrl.t.lire('email')}}
+      </li>
+      <li ng-attr-aria-current="{{$ctrl.demande ? 'step' : undefined}}">
+        <span aria-hidden="true">2</span>{{$ctrl.t.lire('etapeVerification')}}
+      </li>
+    </ol>
+    <form name="formCompte" ng-submit="formCompte.$valid && $ctrl.soumettre()">
+      <fieldset ng-disabled="$ctrl.occupe">
+        <div class="auth-identifiant">
+          <div class="auth-identifiant-titre">
+            <label ng-attr-for="{{$ctrl.identifiantTelephone() ? 'compte-telephone' : 'compte-email'}}">
+              {{$ctrl.t.lire($ctrl.identifiantTelephone() ? 'telephone' : 'email')}}
+            </label>
+            <button ng-if="$ctrl.mode === 'connexion'" class="text-button auth-method" type="button"
+              ng-click="$ctrl.changerIdentifiant()">
+              {{$ctrl.t.lire($ctrl.identifiantTelephone() ? 'utiliserEmail' : 'utiliserTelephone')}}
+            </button>
+          </div>
+          <span class="auth-input auth-input-email" ng-if="!$ctrl.identifiantTelephone()">
+            <input id="compte-email" type="email" placeholder="nom@exemple.mg" maxlength="255" autocomplete="email" ng-model="$ctrl.champs.email" ng-readonly="$ctrl.demande" required>
+          </span>
+          <div class="auth-telephone" ng-if="$ctrl.identifiantTelephone()">
+            <span id="compte-indicatif" class="auth-indicatif">{{$ctrl.indicatif}}</span>
+            <input id="compte-telephone" type="tel" inputmode="numeric" placeholder="340000000"
+              maxlength="9" pattern="[1-9][0-9]{8}" autocomplete="tel-national"
+              aria-describedby="compte-indicatif" ng-model="$ctrl.champs.numeroNational" required>
+          </div>
+        </div>
+        <div class="auth-verification" ng-if="$ctrl.demande">
+          <p>{{$ctrl.t.lire('codeEnvoye')}}</p>
+          <label>{{$ctrl.t.lire('code')}}
+            <input type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" ng-model="$ctrl.champs.code" required>
+          </label>
+          <label>{{$ctrl.t.lire('nom')}}<input autocomplete="name" maxlength="150" ng-model="$ctrl.champs.nom" required></label>
+          <label>{{$ctrl.t.lire('langue')}}
+            <select ng-model="$ctrl.champs.langue"><option value="fr">Français</option><option value="mg">Malagasy</option></select>
+          </label>
+        </div>
+        <label ng-if="$ctrl.mode === 'connexion' || $ctrl.demande">{{$ctrl.t.lire('motDePasse')}}
+          <span class="auth-input auth-input-password">
+            <input type="password" maxlength="72" ng-minlength="$ctrl.demande ? 8 : 1" ng-attr-autocomplete="{{$ctrl.demande ? 'new-password' : 'current-password'}}" ng-model="$ctrl.champs.motDePasse" required>
+          </span>
+        </label>
+        <button class="primary" type="submit">{{$ctrl.t.lire($ctrl.occupe ? 'chargement' : $ctrl.mode === 'connexion' ? 'entrer' : $ctrl.demande ? 'valider' : 'envoyerCode')}}</button>
+        <button ng-if="$ctrl.demande" type="button" class="subtle" ng-click="$ctrl.choisir('inscription')">{{$ctrl.t.lire('recommencer')}}</button>
+      </fieldset>
+      <p ng-if="$ctrl.erreur" class="error" role="alert">{{$ctrl.erreur}}</p>
+      <p ng-if="$ctrl.succes" role="status">{{$ctrl.succes}}</p>
+    </form>
+    <div class="auth-switch">
+      <span>{{$ctrl.t.lire($ctrl.mode === 'connexion' ? 'sansCompte' : 'avecCompte')}}</span>
+      <button type="button" class="text-button" ng-disabled="$ctrl.occupe"
+        ng-click="$ctrl.choisir($ctrl.mode === 'connexion' ? 'inscription' : 'connexion')">
+        {{$ctrl.t.lire($ctrl.mode === 'connexion' ? 'inscription' : 'entrer')}}
+      </button>
+    </div>
+  </article>
+  <guide-accueil t="$ctrl.t"></guide-accueil>
+</section>

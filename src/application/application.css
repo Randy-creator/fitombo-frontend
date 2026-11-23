@@ -1,0 +1,31 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  gap: var(--gap);
+  padding: clamp(.85rem, 2.3vh, 1.7rem) var(--gutter);
+}
+.shell > * { width: 100%; }
+.shell > compte-fitombo { display: grid; flex: 1; align-content: center; min-height: 0; }
+.shell-connexion {
+  --auth-width: 90rem;
+  --gutter: clamp(.85rem, 2.75vw, 2.8rem);
+  position: relative;
+  isolation: isolate;
+  background: #bcc49d url('../assets/photos/apercu-paturage.webp') center 55% / cover no-repeat;
+}
+.shell-connexion > :not(fond-video) {
+  position: relative;
+  z-index: 1;
+  max-width: var(--auth-width);
+}
+.notice { padding: .65rem .9rem; margin-bottom: 0; }
+@media (max-width: 46rem) {
+  .shell > compte-fitombo { flex: 0 0 auto; }
+  .shell-connexion { background-position: 57% center; }
+}
+@media (min-width: 60rem) {
+  .shell-connexion { --auth-width: 107rem; }
+}

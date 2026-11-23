@@ -1,0 +1,156 @@
+guide-accueil { display: grid; grid-area: features; min-width: 0; }
+
+.guide {
+  display: grid;
+  grid-template-rows: 1fr var(--guide-nav-height, auto);
+  min-width: 0;
+  gap: var(--guide-nav-gap, .95rem);
+}
+.guide-livre {
+  display: grid;
+  position: relative;
+  min-width: 0;
+  perspective: 1100px;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  user-select: none;
+  isolation: isolate;
+}
+.guide-livre:active { cursor: grabbing; }
+.guide-pages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 0 #e4dece, 0 4px 0 #d5cdbb, 0 6px 0 #c3baaa, 0 15px 26px #211d2650;
+}
+.guide-page, .guide-face {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: .48rem;
+  min-width: 0;
+  padding: clamp(.65rem, 1.4vw, 1.3rem);
+  background-color: #fcfaf0ea;
+  background-image:
+    linear-gradient(0deg, #c3baa514 1px, transparent 1px),
+    linear-gradient(90deg, #c3baa514 1px, transparent 1px);
+  background-size: 1.2rem 1.2rem;
+  overflow-wrap: anywhere;
+}
+.guide-page-gauche {
+  border-radius: 1rem .18rem .18rem 1rem;
+  box-shadow: inset -16px 0 16px -16px #5a4c33a6;
+}
+.guide-page-droite {
+  border-radius: .18rem 1rem 1rem .18rem;
+  box-shadow: inset 16px 0 16px -16px #5a4c3380;
+}
+.guide-numero {
+  margin-block-start: auto;
+  padding-top: .2rem;
+  color: #4b6351;
+  font-size: .7rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+.guide-page-gauche .guide-numero,
+.guide-feuillet-suivant .guide-verso .guide-numero,
+.guide-feuillet-precedent .guide-recto .guide-numero { text-align: start; }
+.guide-illustration {
+  display: block;
+  width: 100%;
+  height: clamp(3rem, 7.4vw, 5.65rem);
+  object-fit: cover;
+  object-position: center;
+  border-radius: .5rem;
+  box-shadow: 0 2px 5px #352f2526;
+}
+.guide h2 { margin: 0; font-size: clamp(.93rem, 1.28vw, 1.18rem); text-wrap: initial; }
+.guide p { margin: 0; color: #405246; font-size: .8rem; }
+.guide-etapes {
+  display: grid;
+  gap: .36rem;
+  margin: .14rem 0 0;
+  padding-inline-start: 1.12rem;
+  color: #263d31;
+  font-size: .8rem;
+  line-height: 1.43;
+}
+.guide-etapes li { padding-inline-start: .13rem; }
+.guide-etapes li::marker { color: #25624b; font-weight: 700; }
+
+.guide-feuillet {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 50%;
+  transform-style: preserve-3d;
+  animation-timing-function: cubic-bezier(.42, 0, .32, 1);
+  animation-fill-mode: both;
+  pointer-events: none;
+}
+.guide-feuillet-suivant {
+  left: 50%;
+  transform-origin: left center;
+  animation-name: feuille-suivante;
+}
+.guide-feuillet-precedent {
+  right: 50%;
+  transform-origin: right center;
+  animation-name: feuille-precedente;
+}
+.guide-feuillet-glisse {
+  animation-name: none;
+  transition-property: transform;
+  transition-timing-function: var(--ease-ui);
+}
+.guide-face { position: absolute; inset: 0; border-radius: .5rem; backface-visibility: hidden; }
+.guide-verso { transform: rotateY(180deg); }
+@keyframes feuille-suivante {
+  to { transform: rotateY(-180deg); }
+}
+@keyframes feuille-precedente {
+  to { transform: rotateY(180deg); }
+}
+
+.guide-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(.3rem, 1vw, .65rem);
+}
+.guide-action {
+  min-height: var(--guide-nav-height, 2.05rem);
+  border: 0;
+  border-radius: 999px;
+  background: #faf8eee8;
+  color: #263d31;
+  box-shadow: 0 3px 10px #221d2730;
+}
+.guide-action {
+  display: flex;
+  align-items: center;
+  gap: .34rem;
+  padding: .3rem .7rem;
+  font-size: .72rem;
+  font-weight: 600;
+  line-height: 1.21;
+}
+.guide-action:not(:disabled):hover { background: #fffdf5; }
+.guide-action:disabled { opacity: .64; }
+.guide-fleche { font-size: 1.1rem; line-height: .85; }
+
+@media (max-width: 28rem) {
+  .guide-page, .guide-face { padding: .62rem; }
+  .guide p, .guide-etapes { font-size: .76rem; }
+  .guide-action { padding-inline: .48rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .guide-action { transition: background-color var(--motion); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide-feuillet { display: none; }
+}

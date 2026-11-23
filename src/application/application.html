@@ -1,0 +1,9 @@
+<div class="shell" ng-class="{'shell-connexion': !$ctrl.session.profil}">
+  <fond-video ng-if="!$ctrl.session.profil" aria-hidden="true"></fond-video>
+  <en-tete-fitombo profil="$ctrl.session.profil" t="$ctrl.t" fermeture="$ctrl.fermeture"
+    on-langue="$ctrl.choisirLangue(langue)" on-deconnexion="$ctrl.deconnecter()"></en-tete-fitombo>
+  <p class="card notice" role="alert" ng-if="$ctrl.session.expiree">{{$ctrl.t.lire('finSession')}}</p>
+  <p class="card notice" role="alert" ng-if="$ctrl.erreurSession">{{$ctrl.t.erreur($ctrl.erreurSession)}}</p>
+  <compte-fitombo ng-if="!$ctrl.session.profil"></compte-fitombo>
+  <exploitations-fitombo ng-if="$ctrl.session.profil"></exploitations-fitombo>
+</div>

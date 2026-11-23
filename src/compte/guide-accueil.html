@@ -1,0 +1,29 @@
+<section class="guide" ng-attr-aria-label="{{$ctrl.t.lire('guide')}}">
+  <div class="guide-livre" glissement-guide>
+    <div class="guide-pages">
+      <page-guide class="guide-page guide-page-gauche" t="$ctrl.t" page="$ctrl.pageGauche()"></page-guide>
+      <page-guide class="guide-page guide-page-droite" t="$ctrl.t" page="$ctrl.pageDroite()"></page-guide>
+    </div>
+    <div class="guide-feuillet" ng-if="$ctrl.feuillet" ng-style="$ctrl.feuillet.style" aria-hidden="true"
+      ng-class="[$ctrl.feuillet.suivant ? 'guide-feuillet-suivant' : 'guide-feuillet-precedent', {'guide-feuillet-glisse': $ctrl.feuillet.glisse}]">
+      <page-guide class="guide-face guide-recto" t="$ctrl.t" page="$ctrl.feuillet.recto"></page-guide>
+      <page-guide class="guide-face guide-verso" t="$ctrl.t" page="$ctrl.feuillet.verso"></page-guide>
+    </div>
+  </div>
+  <div class="guide-navigation">
+    <button type="button" class="guide-action" ng-click="$ctrl.tourner(-1)"
+      ng-disabled="$ctrl.debut === 0">
+      <span class="guide-fleche" aria-hidden="true">‹</span>
+      {{$ctrl.t.lire('precedent')}}
+    </button>
+    <span class="visually-hidden" aria-live="polite">
+      {{$ctrl.t.lire('pagesGuide')}}
+      {{$ctrl.t.nombre($ctrl.debut + 1)}}–{{$ctrl.t.nombre($ctrl.debut + 2)}} / {{$ctrl.t.nombre($ctrl.total)}}
+    </span>
+    <button type="button" class="guide-action" ng-click="$ctrl.tourner(1)"
+      ng-disabled="$ctrl.debut + 2 >= $ctrl.total">
+      {{$ctrl.t.lire('suivant')}}
+      <span class="guide-fleche" aria-hidden="true">›</span>
+    </button>
+  </div>
+</section>
