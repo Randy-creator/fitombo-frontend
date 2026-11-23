@@ -7,7 +7,7 @@ Socle web en AngularJS 1.8.3, dernière version stable publiée du paquet
 ## Démarrage local
 
 Démarre d’abord Spring et PostgreSQL selon le [guide de l’espace de travail](../README.md).
-Depuis ce dossier, vérifie que `curl -fsS http://127.0.0.1:8080/ping`
+Depuis ce dossier, vérifie que `curl -fsS http://localhost:8080/ping`
 renvoie `pong`. Si Spring échoue au démarrage, vérifie notamment que la
 base nommée dans `fitombo/.env` par `DB_URL` existe. Compose initialise
 la base de `DB_NAME` uniquement lors de la création du volume PostgreSQL.
@@ -26,7 +26,7 @@ npm run dev
 Ouvrir http://localhost:5173. Le bouton de l’accueil appelle `GET /ping`
 et vérifie que le backend répond `pong`.
 
-Vite transmet `/api/ping` à `http://127.0.0.1:8080/ping`. Si Spring
+Vite transmet `/api/ping` à `http://localhost:8080/ping`. Si Spring
 écoute ailleurs en développement, copie `.env.example` en `.env.local`
 et adapte `FITOMBO_API_PROXY_TARGET`. Redémarre Vite après ce changement.
 

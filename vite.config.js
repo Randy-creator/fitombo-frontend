@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
       proxy: {
         '^/api(?:/|$)': {
-          target: FITOMBO_API_PROXY_TARGET || 'http://127.0.0.1:8080',
+          target: FITOMBO_API_PROXY_TARGET || 'http://localhost:8080',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api(?=\/|$)/, '') || '/',
         },
